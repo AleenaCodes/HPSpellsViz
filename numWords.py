@@ -22,8 +22,6 @@ while line:
         wordsDict[word] = wordsDict.get(word,0) + 1
     line = inputFile.readline()
 
-print("========finished first loop===========")
-
 iter = 0
 
 for key in sorted(wordsDict, key=wordsDict.get, reverse=True):

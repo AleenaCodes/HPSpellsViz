@@ -3,10 +3,10 @@
 
 Have in a struct -
 
-Name        : Str : Name of Spell
-Total       : Int : Total number of mentions
-Occurences  : []  : Line number of each occurrence
-Type        : Str : Category of spell
+Name         : Str : Name of Spell
+Total        : Int : Total number of mentions
+Occurrences  : []  : Line number of each occurrence
+Type         : Str : Category of spell
 
 
 Could splice together all txt files and then run
