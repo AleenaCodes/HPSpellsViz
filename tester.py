@@ -28,3 +28,29 @@ for k, v in wordsDict.items():
 # print(d["dict1"])
 # print(d["dict1"]["foo"])
 # print(d["dict1"]["bar"])
+
+
+# ========== Extra snippets =========
+
+# inputFile = open("Books/Book1.txt.", 'r', encoding='utf8')
+# outputFile = open("Books/Book1Stripped.txt", 'w', encoding='utf8')
+#
+# line = inputFile.readline()
+#
+# while line:
+#     outputLine = re.sub('[^a-zA-Z0-9\n]', ' ', line)
+#     outputFile.write(outputLine)
+#     line = inputFile.readline()
+
+# iter = 0
+# for key in sorted(wordsDict, key=wordsDict.get, reverse=True):
+#   print("{} : {}".format(key,wordsDict[key]))
+#   iter += 1
+#   if (iter>20):
+#       break
+
+# sortedDict = sorted(wordsDict, key=wordsDict.get, reverse=True)
+# print(sortedDict[0:20])
+#
+# sortedDict2 = sorted(wordsDict.values(), reverse=True)
+# print(sortedDict2[0:20])

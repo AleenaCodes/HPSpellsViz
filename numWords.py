@@ -1,45 +1,47 @@
 import re
 
-inputFile = open("Books/Book1.txt.", 'r', encoding='utf8')
-outputFile = open("Books/Book1Stripped.txt", 'w', encoding='utf8')
-
-line = inputFile.readline()
-
-while line:
-    outputLine = re.sub('[^a-zA-Z0-9\n]', ' ', line)
-    outputFile.write(outputLine)
-    line = inputFile.readline()
-
-
 wordsDict = {}
+prevHarry = 0
+nowHarry = 0
 
-inputFile = open("Books/Book1Stripped.txt", 'r', encoding='utf8')
+filesnames = ["Books/Book1Stripped.txt",
+              "Books/Book2Stripped.txt",
+              "Books/Book3Stripped.txt",
+              "Books/Book4Stripped.txt",
+              "Books/Book5Stripped.txt",
+              "Books/Book6Stripped.txt",
+              "Books/Book7Stripped.txt"]
 
-line = inputFile.readline()
+shortNames = {"Books/Book1Stripped.txt": "1",
+              "Books/Book2Stripped.txt": "2",
+              "Books/Book3Stripped.txt": "3",
+              "Books/Book4Stripped.txt": "4",
+              "Books/Book5Stripped.txt": "5",
+              "Books/Book6Stripped.txt": "6",
+              "Books/Book7Stripped.txt": "7"}
 
-lineNo = 0
-while line:
-    for word in line.split():
-        if word in wordsDict:
-            wordsDict[word]["total"] = (wordsDict[word]["total"] + 1)
-            wordsDict[word]["lines"].append(lineNo)
-        else:
-            wordsDict[word] = {"total" : 1, "lines" : [lineNo]}
-        # TODO need line here to add occurrence of word
-    lineNo += 1
+for filename in filesnames:
+    inputFile = open(filename, 'r', encoding='utf8')
+    shortName = shortNames[filename]
+
     line = inputFile.readline()
 
-# iter = 0
-# for key in sorted(wordsDict, key=wordsDict.get, reverse=True):
-#   print("{} : {}".format(key,wordsDict[key]))
-#   iter += 1
-#   if (iter>20):
-#       break
+    lineNo = 0
+    while line:
+        for word in line.split():
+            lowerCaseWord = word.lower()
+            if lowerCaseWord in wordsDict:
+                wordsDict[lowerCaseWord]["total"] = (wordsDict[lowerCaseWord]["total"] + 1)
+                wordsDict[lowerCaseWord]["lines"].append((shortName, lineNo))
+            else:
+                wordsDict[lowerCaseWord] = {"total" : 1, "lines" : [(shortName,lineNo)]}
+        lineNo += 1
+        line = inputFile.readline()
 
-# sortedDict = sorted(wordsDict, key=wordsDict.get, reverse=True)
-# print(sortedDict[0:20])
-#
-# sortedDict2 = sorted(wordsDict.values(), reverse=True)
-# print(sortedDict2[0:20])
+    print("num of Harry after reading from " + filename + " is " + str(wordsDict["harry"]["total"]))
 
-print("num of Wingardium is " + str(wordsDict["Alohomora"]))
+    nowHarry = wordsDict["harry"]["total"]
+    print("added " + str(nowHarry - prevHarry))
+    prevHarry = nowHarry
+
+print(str(wordsDict["expelliarmus"]))
