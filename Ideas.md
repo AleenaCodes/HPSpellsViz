@@ -2,7 +2,9 @@
 
 Have a nested dictionary:
 
-Name         : Str : Name of Spell
+Name         : Str : Name of spell
+
+Description  : Str : Short description of spell
 
 Total        : Int : Total number of mentions
 
