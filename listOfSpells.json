@@ -1,0 +1,322 @@
+{
+  "accio" : {
+    "description" : "brings an object to you",
+    "type" : "charm" ,
+  },
+  "aguamenti" : {
+    "description" : "creates a gush of water from the tip of the spell caster’s wand",
+    "type" : "conjuration"
+  },
+  "alohomora" : {
+    "description" : "opens locks" ,
+    "type" : "charm"
+  },
+  "anapneo" : {
+    "description" : "clears the target's airways",
+    "type": "healing spell"
+  },
+  "aparecium" : {
+    "description" : "makes invisible ink become visible" ,
+    "type" : "charm"
+  },
+  "avada kedavra" : {
+    "description" : "kills your opponent",
+    "type" : "unforgivable curse"
+  },
+  "avifors" : {
+    "description" : "turns things into birds" ,
+    "type" : "transfiguration"
+  },
+  "avis" : {
+    "description" : "makes birds fly out of the end of your wand",
+    "type" : "conjuration"
+  },
+  "bombarda" : {
+    "description" : "causes a small, locally contained explosion" ,
+    "type" : "charm"
+  },
+  "colloportus" : {
+    "description" : "closes a door and binds it so that it can’t be opened",
+    "type" : "charm"
+  },
+  "confringo" : {
+    "description" : "causes the item targeted to explode",
+    "type" : "curse"
+  },
+  "confundus" : {
+    "description" : "confounds your target, or makes them temporarily confused",
+    "type" : "charm"
+  },
+  "conjunctivitis" : {
+    "description" : "damages the eyesight of your opponent, making them seem to have pink eye",
+    "type" : "curse"
+  },
+  "crucio" : {
+    "description" : "tortures your opponent mercilessly" ,
+    "type" : "unforgivable curse"
+  },
+  "deletrius" : {
+    "description" : "erases the last spell cast by a wand so that it can’t be discovered",
+    "type" : "counter-spell"
+  },
+  "densaugeo" : {
+    "description" : "makes teeth grow out of control",
+    "type" : "hex"
+  },
+  "diffindo" : {
+    "description" : "makes seams split open, severs an object into two pieces",
+    "type" : "charm"
+  },
+  "dissendium" : {
+    "description" : "opens a specific passageway into a cellar",
+    "type": "charm"
+  },
+  "duro" : {
+    "description" : "turns an item to stone",
+    "type" : "charm"
+  },
+  "engorgio" : {
+    "description" : "makes an item larger, as in swollen",
+    "type" : "charm"
+  },
+  "episkey" : {
+    "description" : "heals relatively minor wounds",
+    "type" : "healing spell"
+  },
+  "evanesco" : {
+    "description" : "causes an item to immediately dissolve away, as if it had never existed",
+    "type" : "transfiguration"
+  },
+  "expecto patronum" : {
+    "description" : "creates a Patronus",
+    "type" : "charm"
+  },
+  "expelliarmus" : {
+    "description" : "disarms the target of the spell" ,
+    "type" : "charm"
+  },
+  "ferula" : {
+    "description" : "binds a broken limb with a splint and bandages",
+    "type" : "healing spell"
+  },
+  "fidelius" : {
+    "description" : "allows a secret to be hidden within the secret keeper’s soul",
+    "type" : "charm"
+  },
+  "finite incantatem" : {
+    "description" : "stops any spell",
+    "type" : "counter-spell"
+  },
+  "flagrate" : {
+    "description" : "allows the user to write or draw in the air with fire",
+    "type" : "charm"
+  },
+  "flipendo" : {
+    "description" : "pushes or flips something backwards" ,
+    "type" : "jinx"
+  },
+  "furnunculus" : {
+    "description" : "causes a person to break out in boils",
+    "type" : "jinx"
+  },
+  "geminio" : {
+    "description" : "creates a duplicate of an item",
+    "type" : "conjuration"
+  },
+  "homenum revelio" : {
+    "description" : "reveals the presence of other humans",
+    "type" : "charm"
+  },
+  "homorphus" : {
+    "description" : "makes a werewolf or person disguised as an animal resume their human shape",
+    "type" : "charm"
+  },
+  "immobulus" : {
+    "description" : "immobilizes the target",
+    "type" : "charm"
+  },
+  "impedimenta" : {
+    "description" : "puts up an impediment that slows down something or someone that is coming toward you",
+    "type" : "jinx"
+  },
+  "imperio" : {
+    "description" : "allows the user to assume complete control of another person",
+    "type" : "unforgivable curse"
+  },
+  "impervius" : {
+    "description" : "repels water from a surface",
+    "type" : "charm"
+  },
+  "incarcerous" : {
+    "description" : "conjures up ropes",
+    "type" : "conjuration"
+  },
+  "incendio" : {
+    "description" : "lights a fire",
+    "type" : "conjuration"
+  },
+  "legilimens" : {
+    "description" : "allows the user to gain access to another’s mind and memories" ,
+    "type" : "charm"
+  },
+  "levicorpus" : {
+    "description" : "turns your opponent upside down and dangles them in thin air" ,
+    "type" : "jinx"
+  },
+  "liberacorpus" : {
+    "description" : "frees a body that has been caught up by the levicorpus spell",
+    "type" : "counter-spell"
+  },
+  "locomotor" : {
+    "description" : "levitates a target off the ground",
+    "type" : "charm"
+  },
+  "locomotor mortis" : {
+    "description" : "locks an opponent’s legs together",
+    "type" : "curse"
+  },
+  "lumos" : {
+    "description" : "creates light",
+    "type" : "charm"
+  },
+  "mobiliarbus" : {
+    "description" : "used to move a tree from one place to another",
+    "type" : "charm"
+  },
+  "mobilicorpus" : {
+    "description" : "used to move a body from one place to another",
+    "type" : "charm"
+  },
+  "morsmordre" : {
+    "description" : "used to summon the Dark Mark",
+    "type" : "curse"
+  },
+  "muffliato" : {
+    "description" : "causes a buzzing noise to surround a limited area",
+    "type" : "charm"
+  },
+  "nox" : {
+    "description" : "extinguishes light",
+    "type" : "counter-spell"
+  },
+  "obliviate" : {
+    "description" : "erases a person's memories of an event",
+    "type" : "charm"
+  },
+  "orchideous" : {
+    "description" : "conjures a bunch of flowers from the user’s wand",
+    "type" : "conjuration"
+  },
+  "petrificus totalus" : {
+    "description" : "petrifies an opponent totally",
+    "type" : "curse"
+  },
+  "point me" : {
+    "description" : "makes the user’s wand act like a compass",
+    "type" : "charm"
+  },
+  "portus" : {
+    "description" : "turns any item into a portkey",
+    "type" : "charm"
+  },
+  "prior incantato" : {
+    "description" : "reveals to you the last spell that a wand was used to cast",
+    "type" : "charm"
+  },
+  "protego" : {
+    "description" : "protects the user, and sends a spell back on an opponent" ,
+    "type" : "charm"
+  },
+  "quietus" : {
+    "description" : "makes things quiet",
+    "type" : "charm"
+  },
+  "reducio" : {
+    "description" : "shrinks an item",
+    "type" : "charm"
+  },
+  "reducto" : {
+    "description" : "blasts solid objects into pieces",
+    "type" : "curse"
+  },
+  "relashio" : {
+    "description" : "releases something from being constrained or held",
+    "type" : "jinx"
+  },
+  "rennervate" : {
+    "description" : "used to wake up a stunned person",
+    "type" : "charm"
+  },
+  "reparo" : {
+    "description" : "repairs broken items",
+    "type" : "charm"
+  },
+  "repello inimicum" : {
+    "description" : "conjures a barrier of magical protection",
+    "type" : "conjuration"
+  },
+  "repello muggletum" : {
+    "description" : "makes an area invisible to muggles",
+    "type" : "charm"
+  },
+  "revelio" : {
+    "description" : "causes something that is hidden to be revealed",
+    "type" : "charm"
+  },
+  "rictusempra" : {
+    "description" : "causes a person to curl up in laughter, as if being tickled",
+    "type" : "charm"
+  },
+  "riddikulus" : {
+    "description" : "makes a boggart assume a “ridiculous” form",
+    "type" : "charm"
+  },
+  "salvio hexia" : {
+    "description" : "deflects any hexes cast toward a specific location",
+    "type" : "charm"
+  },
+  "scourgify" : {
+    "description" : "used to clean dirt or other material off of a surface",
+    "type" : "charm"
+  },
+  "sectumsempra" : {
+    "description" : "causes lacerations to appear all over an opponent’s body",
+    "type" : "curse"
+  },
+  "serpensortia" : {
+    "description" : "conjures a snake",
+    "type" : "conjuration"
+  },
+  "silencio" : {
+    "description" : "makes the target of the spell unable to make any sound",
+    "type" : "charm"
+  },
+  "sonorus" : {
+    "description" : "amplifies the user’s voice",
+    "type" : "charm"
+  },
+  "stupefy" : {
+    "description" : "knocks an opponent insensible temporarily",
+    "type" : "charm"
+  },
+  "tarantallegra" : {
+    "description" : "forces an opponent’s legs to dance uncontrollably",
+    "type" : "jinx"
+  },
+  "tergeo" : {
+    "description" : "scours something clean",
+    "type" : "charm"
+  },
+  "vera verto" : {
+    "description" : "transforms animals into water goblets",
+    "type" : "transfiguration"
+  },
+  "waddiwasi" : {
+    "description" : "removes a stuck object",
+    "type" : "jinx"
+  },
+  "wingardium leviosa" : {
+    "description" : "allows the user to make an object levitate",
+    "type" : "charm"
+  },
+}
