@@ -4,7 +4,7 @@
     "type" : "charm" ,
   },
   "aguamenti" : {
-    "description" : "creates a gush of water from the tip of the spell caster’s wand",
+    "description" : "creates a gush of water from the tip of the spell caster's wand",
     "type" : "conjuration"
   },
   "alohomora" : {
@@ -23,20 +23,16 @@
     "description" : "kills your opponent",
     "type" : "unforgivable curse"
   },
-  "avifors" : {
-    "description" : "turns things into birds" ,
-    "type" : "transfiguration"
-  },
   "avis" : {
     "description" : "makes birds fly out of the end of your wand",
     "type" : "conjuration"
   },
-  "bombarda" : {
-    "description" : "causes a small, locally contained explosion" ,
-    "type" : "charm"
+  "cave inimicum" : {
+    "description" : "strengthens an enclosure from enemies",
+    "type" : "spell"
   },
   "colloportus" : {
-    "description" : "closes a door and binds it so that it can’t be opened",
+    "description" : "closes a door and binds it so that it can't be opened",
     "type" : "charm"
   },
   "confringo" : {
@@ -55,13 +51,21 @@
     "description" : "tortures your opponent mercilessly" ,
     "type" : "unforgivable curse"
   },
+  "defodio" : {
+    "description" : "carves through material",
+    "type" : "charm"
+  },
   "deletrius" : {
-    "description" : "erases the last spell cast by a wand so that it can’t be discovered",
+    "description" : "erases the last spell cast by a wand so that it can't be discovered",
     "type" : "counter-spell"
   },
   "densaugeo" : {
     "description" : "makes teeth grow out of control",
     "type" : "hex"
+  },
+  "deprimo" : {
+    "description" : "blasts holes in ground",
+    "type" : "charm"
   },
   "diffindo" : {
     "description" : "makes seams split open, severs an object into two pieces",
@@ -83,9 +87,9 @@
     "description" : "heals relatively minor wounds",
     "type" : "healing spell"
   },
-  "evanesco" : {
-    "description" : "causes an item to immediately dissolve away, as if it had never existed",
-    "type" : "transfiguration"
+  "erecto" : {
+    "description" : "erects a structure",
+    "type" : "charm"
   },
   "expecto patronum" : {
     "description" : "creates a Patronus",
@@ -95,12 +99,16 @@
     "description" : "disarms the target of the spell" ,
     "type" : "charm"
   },
+  "expulso" : {
+    "description" : "blows things up" ,
+    "type" : "curse"
+  },
   "ferula" : {
     "description" : "binds a broken limb with a splint and bandages",
     "type" : "healing spell"
   },
   "fidelius" : {
-    "description" : "allows a secret to be hidden within the secret keeper’s soul",
+    "description" : "allows a secret to be hidden within the secret keeper's soul",
     "type" : "charm"
   },
   "finite incantatem" : {
@@ -111,10 +119,6 @@
     "description" : "allows the user to write or draw in the air with fire",
     "type" : "charm"
   },
-  "flipendo" : {
-    "description" : "pushes or flips something backwards" ,
-    "type" : "jinx"
-  },
   "furnunculus" : {
     "description" : "causes a person to break out in boils",
     "type" : "jinx"
@@ -123,16 +127,16 @@
     "description" : "creates a duplicate of an item",
     "type" : "conjuration"
   },
+  "glisseo" : {
+    "description" : "turns stairs into a slide",
+    "type" : "charm"
+  },
   "homenum revelio" : {
     "description" : "reveals the presence of other humans",
     "type" : "charm"
   },
   "homorphus" : {
     "description" : "makes a werewolf or person disguised as an animal resume their human shape",
-    "type" : "charm"
-  },
-  "immobulus" : {
-    "description" : "immobilizes the target",
     "type" : "charm"
   },
   "impedimenta" : {
@@ -155,8 +159,12 @@
     "description" : "lights a fire",
     "type" : "conjuration"
   },
+  "langlock" : {
+    "description" : "sticks tongue to roof of the mouth" ,
+    "type" : "jinx"
+  },
   "legilimens" : {
-    "description" : "allows the user to gain access to another’s mind and memories" ,
+    "description" : "allows the user to gain access to another's mind and memories" ,
     "type" : "charm"
   },
   "levicorpus" : {
@@ -172,12 +180,16 @@
     "type" : "charm"
   },
   "locomotor mortis" : {
-    "description" : "locks an opponent’s legs together",
+    "description" : "locks an opponent's legs together",
     "type" : "curse"
   },
   "lumos" : {
     "description" : "creates light",
     "type" : "charm"
+  },
+  "meteolojinx recanto" : {
+    "description" : "causes weather effects caused by incantations to cease",
+    "type" : "counter-spell"
   },
   "mobiliarbus" : {
     "description" : "used to move a tree from one place to another",
@@ -203,16 +215,28 @@
     "description" : "erases a person's memories of an event",
     "type" : "charm"
   },
+  "obscuro" : {
+    "description" : "blindfolds target",
+    "type" : "conjuration"
+  },
+  "oppugno" : {
+    "description" : "assaults target with directed object(s)",
+    "type" : "jinx"
+  },
   "orchideous" : {
-    "description" : "conjures a bunch of flowers from the user’s wand",
+    "description" : "conjures a bunch of flowers from the user's wand",
     "type" : "conjuration"
   },
   "petrificus totalus" : {
     "description" : "petrifies an opponent totally",
     "type" : "curse"
   },
+  "piertotum locomotor" : {
+    "description" : "animates target",
+    "type" : "charm"
+  },
   "point me" : {
-    "description" : "makes the user’s wand act like a compass",
+    "description" : "makes the user's wand act like a compass",
     "type" : "charm"
   },
   "portus" : {
@@ -225,6 +249,14 @@
   },
   "protego" : {
     "description" : "protects the user, and sends a spell back on an opponent" ,
+    "type" : "charm"
+  },
+  "protego horribillis" : {
+    "description" : "protects against darkest magic" ,
+    "type" : "charm"
+  },
+  "protego totalum" : {
+    "description" : "shields an area" ,
     "type" : "charm"
   },
   "quietus" : {
@@ -251,10 +283,6 @@
     "description" : "repairs broken items",
     "type" : "charm"
   },
-  "repello inimicum" : {
-    "description" : "conjures a barrier of magical protection",
-    "type" : "conjuration"
-  },
   "repello muggletum" : {
     "description" : "makes an area invisible to muggles",
     "type" : "charm"
@@ -280,7 +308,7 @@
     "type" : "charm"
   },
   "sectumsempra" : {
-    "description" : "causes lacerations to appear all over an opponent’s body",
+    "description" : "causes lacerations to appear all over an opponent's body",
     "type" : "curse"
   },
   "serpensortia" : {
@@ -292,7 +320,11 @@
     "type" : "charm"
   },
   "sonorus" : {
-    "description" : "amplifies the user’s voice",
+    "description" : "amplifies the user's voice",
+    "type" : "charm"
+  },
+  "specialis revelio" : {
+    "description" : "reveals spells cast on objects or potions",
     "type" : "charm"
   },
   "stupefy" : {
@@ -300,16 +332,12 @@
     "type" : "charm"
   },
   "tarantallegra" : {
-    "description" : "forces an opponent’s legs to dance uncontrollably",
+    "description" : "forces an opponent's legs to dance uncontrollably",
     "type" : "jinx"
   },
   "tergeo" : {
     "description" : "scours something clean",
     "type" : "charm"
-  },
-  "vera verto" : {
-    "description" : "transforms animals into water goblets",
-    "type" : "transfiguration"
   },
   "waddiwasi" : {
     "description" : "removes a stuck object",
@@ -320,3 +348,9 @@
     "type" : "charm"
   },
 }
+
+left out "eat slugs" - never said aloud
+
+homenum revelio (use homenum)
+specialis revelio (use specialis)
+piertotum locomotor (use piertotum)
