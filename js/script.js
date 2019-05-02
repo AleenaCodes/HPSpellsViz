@@ -31,10 +31,15 @@ function getDiffTypes(){
 
     var spellCategory = spellData[spell]["type"];
 
+    //spell object to push
+    var newSpell = {};
+    newSpell["name"] = spell;
+    newSpell["size"] = 1;
+
     // loop through all of children nodes and add to correct one
     for (var spellTypeIndex in spellTypes["children"]){
       if (spellTypes["children"][spellTypeIndex]["name"] == spellCategory){
-        spellTypes["children"][spellTypeIndex]["children"].push(spell)
+        spellTypes["children"][spellTypeIndex]["children"].push(newSpell);
       }
     }
   }
@@ -47,20 +52,21 @@ function makeClassificationPage(){
 
   var spellTypes = getDiffTypes();
 
-  spellTypes = {
-    "name": "TOPICS", "children": [{
-        "name": "Topic A",
-        "children": [{"name": "Sub A1", "size": 4}, {"name": "Sub A2", "size": 4}]
-    }, {
-        "name": "Topic B",
-        "children": [{"name": "Sub B1", "size": 3}, {"name": "Sub B2", "size": 3}, {
-            "name": "Sub B3", "size": 3}]
-    }, {
-        "name": "Topic C",
-        "children": [{"name": "Sub A1", "size": 4}, {"name": "Sub A2", "size": 4}]
-    }]
-  };
-
+  console.log(spellTypes);
+  // spellTypes = {
+  //   "name": "TOPICS", "children": [{
+  //       "name": "Topic A",
+  //       "children": [{"name": "Sub A1", "size": 4}, {"name": "Sub A2", "size": 4}]
+  //   }, {
+  //       "name": "Topic B",
+  //       "children": [{"name": "Sub B1", "size": 3}, {"name": "Sub B2", "size": 3}, {
+  //           "name": "Sub B3", "size": 3}]
+  //   }, {
+  //       "name": "Topic C",
+  //       "children": [{"name": "Sub A1", "size": 4}, {"name": "Sub A2", "size": 4}]
+  //   }]
+  // };
+  console.log(spellTypes);
   // Fill section with background div
 
   var parentDiv = document.getElementById("page_Classification")
@@ -84,7 +90,7 @@ function makeClassificationPage(){
   // Variables for sunburst
 
   var radius = ((Math.min(width, height)));
-  var color = d3.scaleOrdinal(d3.schemeCategory20b);
+  var color = d3.scaleOrdinal(d3.schemePastel1);
 
   // Select SVG
 
