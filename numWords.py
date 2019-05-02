@@ -396,11 +396,6 @@ for filename in filesnames:
     prevHarry = nowHarry
 
 # print(str(wordsDict["expelliarmus"]))
-# print(str(wordsDict["incantato"]))
-# print(str(wordsDict["revelio"]))
-# print(str(wordsDict["scourgify"]))
-# print(str(wordsDict["inimicum"]))
-# print(str(wordsDict["kedavra"]))
 
 for fullSpellName in listOfSpells:
     splitSpellName = fullSpellName.split()
