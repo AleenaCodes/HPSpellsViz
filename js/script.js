@@ -48,6 +48,22 @@ function getDiffTypes(){
   return spellTypes;
 }
 
+// function computeTextRotation(d) {
+//  var angle = (x0((d.x0 + d.x1)/2) - Math.PI / 2) / Math.PI * 180;
+//  return (angle >  90 || angle < 270) ?  angle : 180 + angle ;
+//
+//  }
+
+//  function computeTextRotation(d) {
+//     var angle = (d.x0 + d.x1) / Math.PI * 90;  // <-- 1
+//
+//     // Avoid upside-down labels
+//     return (angle < 90 || angle > 270) ? angle : angle + 180;  // <--2 "labels aligned with slices"
+//
+//     // Alternate label formatting
+//     //return (angle < 180) ? angle - 90 : angle + 90;  // <-- 3 "labels as spokes"
+// }
+
 function makeClassificationPage(){
 
   var spellTypes = getDiffTypes();
@@ -75,6 +91,7 @@ function makeClassificationPage(){
   // Variables for sunburst
 
   var radius = ((Math.min(width, height)));
+  console.log("radius = " + radius);
   var color = d3.scaleOrdinal(d3.schemePastel1);
 
   // Select SVG
@@ -122,12 +139,29 @@ function makeClassificationPage(){
     .style('stroke', '#fff')
     .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
 
+  // Rotates properly
+  // groups.append("svg:text")
+  //       .attr("transform", function(d) { return "rotate(" + (d.x0 + d.x1 / 2 - Math.PI / 2) / Math.PI * 180 + ")"; })
+  //       .attr("x", function(d) { return Math.sqrt(d.y0); })
+  //       .attr("x1", "6") // margin
+  //       .attr("y1", ".35em") // vertical-align
+  //       .text(function(d) { return d.data.name;});
+  // .text(function(d) { if (d.data.name == "charm") {return d.data.name;} else return "";});
+
+  // Translates properly
+  // groups.append("svg:text")
+  //   .attr("transform", function(d) {return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; }) // <-- 3
+  //   .attr("x0", "-20")  // <-- 4
+  //   .attr("x0", ".5em")  // <-- 5
+  //   .text(function(d) { return d.parent ? d.data.name : "" });  // <-- 6
+
+  // Does both properly?
   groups.append("svg:text")
-        .attr("transform", function(d) { return "rotate(" + (d.x + d.dx / 2 - Math.PI / 2) / Math.PI * 180 + ")"; })
-        .attr("x", function(d) { return Math.sqrt(d.y); })
-        .attr("dx", "6") // margin
-        .attr("dy", ".35em") // vertical-align
-        .text(function(d) { return d.data.key; });
+    .attr("transform", function(d){return "translate(" + arc.centroid(d) + ")" + "rotate(" + (d.x0 + d.x1 / 2 - Math.PI / 2) / Math.PI * 180 + ") ";})
+    .attr("x", function(d) { return Math.sqrt(d.y0); })
+    .attr("x1", "6") // margin
+    .attr("y1", ".35em") // vertical-align
+    .text(function(d) { return d.data.name;});
 }
 
 function makeMostUsedPage(){
