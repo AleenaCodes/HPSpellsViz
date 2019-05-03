@@ -1001,7 +1001,7 @@ function getDiffTypes(){
     }
   }
 
-  console.log(spellTypes);
+  // console.log(spellTypes);
   return spellTypes;
 }
 
@@ -1058,8 +1058,6 @@ function makeClassificationPage(){
     .sum(function (d) { return d.size});
 
   partition(root);
-
-  console.log(root);
 
   // Calculate size of arcs for each node
 
@@ -1119,6 +1117,20 @@ function makeClassificationPage(){
 }
 
 function makeMostUsedPage(){
+
+  var spellTypes = getDiffTypes();
+
+  console.log(spellTypes);
+
+  // Add in totals to the data structure
+
+  for (spellType in spellTypes["children"]){
+    for (spell in spellTypes["children"][spellType]["children"]){
+      spellTypes["children"][spellType]["children"][spell]["size"] = spellData[spellTypes["children"][spellType]["children"][spell]["name"]]["total"];
+    }
+  }
+
+  // Fill with background div
   var parentDiv = document.getElementById("page_MostUsed")
 
   var width = parentDiv.offsetWidth - 50;
@@ -1127,17 +1139,72 @@ function makeMostUsedPage(){
   var backgroundSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     backgroundSVG.setAttributeNS(null, 'width', (width));
     backgroundSVG.setAttributeNS(null, 'height', (height));
+    backgroundSVG.setAttribute('id', 'mostUsedSVG');
 
   var newSquare = document.createElementNS("http://www.w3.org/2000/svg","rect");
     newSquare.setAttributeNS(null, 'width', (width));
     newSquare.setAttributeNS(null, 'height', (height));
-    newSquare.setAttributeNS(null, 'fill', 'cornflowerblue');
-    newSquare.setAttributeNS(null, 'stroke', 'cornflowerblue');
+    newSquare.setAttributeNS(null, 'fill', 'white');
+    newSquare.setAttributeNS(null, 'stroke', 'white');
     newSquare.setAttributeNS(null, 'stroke-width', 3);
 
   backgroundSVG.appendChild(newSquare);
 
   parentDiv.appendChild(backgroundSVG);
+
+
+
+  var color = d3.scaleOrdinal(d3.schemePastel1);
+  var parentSVG = d3.select('#mostUsedSVG');
+
+
+  const root = d3.treemap()
+    // .tile(d3[tile])
+    .size([width, height])
+    .padding(1)
+    .round(true)
+  (d3.hierarchy(spellTypes)
+    .sum(d => d.value)
+    .sort((a, b) => b.value - a.value))
+
+  // var groups = parentSVG.selectAll('g')
+  //   .data(root.descendants())
+  //   .enter()
+  //   .append('svg:g')
+
+
+  // var cells = parentSVG.selectAll(".cell")
+  //   .data(treemap)
+  //   .enter()
+  //   .append("g")
+  //   .attr("class", "cell")
+  //
+  // cells.append("rect")
+  //   .attr("x", function(d) {return d.x0})
+  //   .attr("y", function(d) {return d.y0})
+  //   .attr("width", function(d) {return d.x1})
+  //   .attr("height", function(d) {return d.y1})
+  //   .attr("fill", function(d) {return d.children ? null : color(d.parent.name);})
+
+
+
+
+    const leaf = parentSVG.selectAll("g")
+    .data(root.leaves())
+    .enter()
+    .append("g")
+      .attr("transform", d => `translate(${d.x0},${d.y0})`);
+
+  leaf.append("title")
+      .text(d => "this"); //d.data.name?
+
+  leaf.append("rect")
+      // .attr("id", d => (d.leafUid = DOM.uid("leaf")).id)
+      .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
+      .attr("fill-opacity", 0.6)
+      .attr("width", d => d.x1 - d.x0)
+      .attr("height", d => d.y1 - d.y0);
+
 }
 
 function makeFullBookPage(){
@@ -1162,9 +1229,38 @@ function makeFullBookPage(){
   parentDiv.appendChild(backgroundSVG);
 }
 
+function makeTitlePage(){
+  var parentDiv = document.getElementById("page_Title")
+
+  var width = parentDiv.offsetWidth - 50;
+  var height = parentDiv.offsetHeight;
+
+  var backgroundSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    backgroundSVG.setAttributeNS(null, 'width', (width));
+    backgroundSVG.setAttributeNS(null, 'height', (height));
+
+  var newSquare = document.createElementNS("http://www.w3.org/2000/svg","rect");
+    newSquare.setAttributeNS(null, 'width', (width));
+    newSquare.setAttributeNS(null, 'height', (height));
+    newSquare.setAttributeNS(null, 'fill', 'silver');
+
+  backgroundSVG.appendChild(newSquare);
+
+  var title = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    title.setAttribute("x", "50%");
+    title.setAttribute("y", "50%");
+    title.setAttribute("text-anchor", "middle");
+    var titleText = document.createTextNode("All The Spells In The Harry Potter Books");     // Create a text node
+    title.appendChild(titleText);
+
+  backgroundSVG.appendChild(title);
+
+  parentDiv.appendChild(backgroundSVG);
+}
+
 function makePages(){
+  // makeTitlePage();
   makeClassificationPage();
   makeMostUsedPage();
   makeFullBookPage();
-  console.log(spellList["accio"]);
 }

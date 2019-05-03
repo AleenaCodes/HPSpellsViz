@@ -10,41 +10,15 @@
   <script src="https://d3js.org/d3-color.v1.min.js"></script>
   <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
   <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-  <style>
-    section {
-      background-color: white;
-    }
-
-    a::before {
-      background-color: black;
-    }
-
-    text {
-      font-size: 6pt;
-      font-family: "Arial", serif;
-    }
-
-    div.tooltip {
-      position: absolute;
-      text-align: center;
-      width: 200px;
-      height: 50px;
-      padding: 2px;
-      padding-top: 5px;
-      font: 12px sans-serif;
-      background: white;
-      border: 0px;
-      border-radius: 8px;
-      pointer-events: none;
-    }
-  </style>
 </head>
 <body>
   <div id="main" class="scroll-container">
-    <section class="section1">
-      <div>
-        Title page
-      </div>
+    <section class="section1" id="page_Title">
+      <h1>All The Spells In The Harry Potter Books</h1>
+      <h3>Just some quick data viz covering all the spells said aloud in the Harry Potter series</h3>
+      <p>
+        Data was scraped and parsed using Python, and then the visualisation made using D3.js
+      </p>
     </section>
     <section class="section2" id="page_Classification">
     </section>
