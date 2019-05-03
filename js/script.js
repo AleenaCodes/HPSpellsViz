@@ -48,28 +48,11 @@ function getDiffTypes(){
   return spellTypes;
 }
 
-// function computeTextRotation(d) {
-//  var angle = (x0((d.x0 + d.x1)/2) - Math.PI / 2) / Math.PI * 180;
-//  return (angle >  90 || angle < 270) ?  angle : 180 + angle ;
-//
-//  }
-
-//  function computeTextRotation(d) {
-//     var angle = (d.x0 + d.x1) / Math.PI * 90;  // <-- 1
-//
-//     // Avoid upside-down labels
-//     return (angle < 90 || angle > 270) ? angle : angle + 180;  // <--2 "labels aligned with slices"
-//
-//     // Alternate label formatting
-//     //return (angle < 180) ? angle - 90 : angle + 90;  // <-- 3 "labels as spokes"
-// }
-
 function makeClassificationPage(){
 
   var spellTypes = getDiffTypes();
 
   // Fill section with background div
-
   var parentDiv = document.getElementById("page_Classification")
 
   var width = parentDiv.offsetWidth - 50;
@@ -100,6 +83,7 @@ function makeClassificationPage(){
     .attr('transform', 'translate(' + (width / 2) + ',' + (height) + ') ' + 'rotate(-90 ' + 0 + ' ' + 0 + ')');
 
   // Use d3 helper functions to transform data
+
   var partition = d3.partition()
     .size([Math.PI, radius]);
 
@@ -118,19 +102,14 @@ function makeClassificationPage(){
     .innerRadius(function (d) { return d.y0 })
     .outerRadius(function (d) { return d.y1 })
 
-  // parentSVG.selectAll('path')
-  //   .data(root.descendants())
-  //   .enter()
-  //   .append('path')
-  //   .attr("display", function (d) { return d.depth ? null : "none"; })
-  //   .attr("d", arc)
-  //   .style('stroke', '#fff')
-  //   .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
+  //Create groups for each rect and text to go in
 
   var groups = parentSVG.selectAll('g')
     .data(root.descendants())
     .enter()
     .append('svg:g')
+
+  //Add rect to each group
 
   groups.append('path')
     .attr("display", function (d) { return d.depth ? null : "none"; })
@@ -138,28 +117,15 @@ function makeClassificationPage(){
     .style('stroke', '#fff')
     .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
 
-  // Rotates properly
-  // groups.append("svg:text")
-  //       .attr("transform", function(d) { return "rotate(" + (d.x0 + d.x1 / 2 - Math.PI / 2) / Math.PI * 180 + ")"; })
-  //       .attr("x", function(d) { return Math.sqrt(d.y0); })
-  //       .attr("x1", "6") // margin
-  //       .attr("y1", ".35em") // vertical-align
-  //       .text(function(d) { return d.data.name;});
-  // .text(function(d) { if (d.data.name == "charm") {return d.data.name;} else return "";});
+  // Add text to each group
 
-  // Translates properly
-  // groups.append("svg:text")
-  //   .attr("transform", function(d) {return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; }) // <-- 3
-  //   .attr("x0", "-20")  // <-- 4
-  //   .attr("x0", ".5em")  // <-- 5
-  //   .text(function(d) { return d.parent ? d.data.name : "" });  // <-- 6
-
-  // Does both properly?
   groups.append("svg:text")
     .attr("transform", function(d){return "translate(" + arc.centroid(d) + ")" + "rotate(" + (d.x0/2 + d.x1 / 2 - Math.PI / 2) / Math.PI * 180 + ") ";})
     .attr("x", function(d) { return Math.sqrt(d.y0); })
     .attr("x1", "6") // margin
     .attr("y1", ".35em") // vertical-align
+    .attr("text-anchor", "middle")
+    .attr("dominant-baseline", "middle")
     .text(function(d) { return d.data.name;});
 }
 
