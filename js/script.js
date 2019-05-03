@@ -91,7 +91,6 @@ function makeClassificationPage(){
   // Variables for sunburst
 
   var radius = ((Math.min(width, height)));
-  console.log("radius = " + radius);
   var color = d3.scaleOrdinal(d3.schemePastel1);
 
   // Select SVG
@@ -157,7 +156,7 @@ function makeClassificationPage(){
 
   // Does both properly?
   groups.append("svg:text")
-    .attr("transform", function(d){return "translate(" + arc.centroid(d) + ")" + "rotate(" + (d.x0 + d.x1 / 2 - Math.PI / 2) / Math.PI * 180 + ") ";})
+    .attr("transform", function(d){return "translate(" + arc.centroid(d) + ")" + "rotate(" + (d.x0/2 + d.x1 / 2 - Math.PI / 2) / Math.PI * 180 + ") ";})
     .attr("x", function(d) { return Math.sqrt(d.y0); })
     .attr("x1", "6") // margin
     .attr("y1", ".35em") // vertical-align
