@@ -102,15 +102,44 @@ function makeClassificationPage(){
     .innerRadius(function (d) { return d.y0 })
     .outerRadius(function (d) { return d.y1 })
 
-  parentSVG.selectAll('path')
+  // parentSVG.selectAll('path')
+  //   .data(root.descendants())
+  //   .enter()
+  //   .append('path')
+  //   .attr("display", function (d) { return d.depth ? null : "none"; })
+  //   .attr("d", arc)
+  //   .style('stroke', '#fff')
+  //   .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
+  //
+  // parentSVG.selectAll('path')
+  //   .data(root.descendants())
+  //   .append('text')
+  //   .attr("transform", function(d) { return "rotate(" + (d.x + d.dx / 2 - Math.PI / 2) / Math.PI * 180 + ")"; })
+  //   .attr("x", function(d) { return Math.sqrt(d.y); })
+  //   .attr("dx", "6") // margin
+  //   .attr("dy", ".35em") // vertical-align
+  //   .text(function(d) { return "this" });
+
+  var groups = parentSVG.selectAll('g')
+    .data(root.descendants())
+    .enter()
+    .append('svg:g')
+
+  groups.selectAll('path')
     .data(root.descendants())
     .enter()
     .append('path')
     .attr("display", function (d) { return d.depth ? null : "none"; })
     .attr("d", arc)
     .style('stroke', '#fff')
-    .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); });
+    .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
 
+  groups.append("svg:text")
+        .attr("transform", function(d) { return "rotate(" + (d.x + d.dx / 2 - Math.PI / 2) / Math.PI * 180 + ")"; })
+        .attr("x", function(d) { return Math.sqrt(d.y); })
+        .attr("dx", "6") // margin
+        .attr("dy", ".35em") // vertical-align
+        .text(function(d) { return d.data.key; });
 }
 
 function makeMostUsedPage(){
