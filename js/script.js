@@ -1009,6 +1009,46 @@ function firstLetterUppercase(str){
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+function wrap(text, width) {
+  console.log("calling wrap with width"+width);
+  console.log(text.attr("previousSibling"));
+  console.log(text.previousSibling);
+  console.log(text);
+
+    text.each(function () {
+        var text = d3.select(this),
+            letters = text.text().split('').reverse(),
+            letter,
+            line = [],
+            lineNumber = 0,
+            lineHeight = 1.1, // ems
+            x = text.attr("x"),
+            y = text.attr("y"),
+            boundingWidth = Number(text.attr("class")),
+            dy = 0, //parseFloat(text.attr("dy")),
+            tspan = text.text(null)
+                        .append("tspan")
+                        .attr("x", x)
+                        .attr("y", y)
+                        .attr("dy", dy + "em");
+        console.log(boundingWidth);
+        while (letter = letters.pop()) {
+            line.push(letter);
+            tspan.text(line.join(""));
+            if (tspan.node().getComputedTextLength() > boundingWidth) {
+                line.pop();
+                tspan.text(line.join(""));
+                line = [letter];
+                tspan = text.append("tspan")
+                            .attr("x", x)
+                            .attr("y", y)
+                            .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                            .text(letter);
+            }
+        }
+    });
+}
+
 function makeClassificationPage(){
 
   var spellTypes = getDiffTypes();
@@ -1170,42 +1210,44 @@ function makeMostUsedPage(){
 
   treemap(root);
 
-  // Create g element for each box
+  console.log(root);
 
+  // Create g element for each box
   const leaf = parentSVG.selectAll("g")
     .data(root.leaves())
     .enter()
     .append("g")
       .attr("transform", d => `translate(${d.x0},${d.y0})`)
-      .attr("class", d => {return "leaf"+d.data.name});
+      .attr("id", d => {return "leaf"+d.data.name});
 
   // Create <title> as spellname
   leaf.append("title")
-      .text(d => d.data.name); //d.data.name?
+      .text(d => d.data.name);
 
-  //
+  // Add in box
   leaf.append("rect")
-      // .attr("id", d => (d.leafUid = DOM.uid("leaf")).id)
+      // .attr("id", d => {return "rect"+d.data.name})
+      .attr("id", d => (d.leafUid = "rect"+d.data.name))
       .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
       .attr("fill-opacity", 0.6)
       .attr("width", d => d.x1 - d.x0)
       .attr("height", d => d.y1 - d.y0);
 
-  leaf.append("clipPath")
-      // .attr("id", d => (d.clipUid = DOM.uid("clip")).id)
-    .append("use")
-      // .attr("xlink:href", d => d.leafUid.href);
-
   leaf.append("text")
-      // .attr("clip-path", d => d.clipUid)
-    .selectAll("tspan")
-    .data(d => d.data.name)
-    .enter()
-    .append("tspan")
-      .attr("x", 3)
-      .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
-      .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
-      .text(d => d);
+    .attr("x", 4)
+    .attr("y", 10)
+    .text(d => d.data.name)
+    .attr("class", d => {console.log(d.x1 - d.x0); return d.x1 - d.x0}) // Awkwardly passing in boundingWidth as a class because I can't figure out how .call() works :(
+    .call(wrap, 5);
+    // .call(wrap, (d => {console.log("this"); return (d.x1 - d.x0)})); // wrap the text in <= 30 pixels
+    // .selectAll("tspan")
+    // .data(d => d.data.name)
+    // .enter()
+    // .append("tspan")
+    //   .attr("x", 3)
+    //   .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
+    //   .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
+    //   .text(d => d);
 
 }
 
