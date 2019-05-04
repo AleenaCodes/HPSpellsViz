@@ -412,7 +412,7 @@ var spellData = {
     {
         "description": "makes the user's wand act like a compass",
         "type": "charm",
-        "total": 2876,
+        "total": 1,
         "lines": [["4",37421]]
     },
     "portus":
@@ -961,7 +961,7 @@ function getDiffTypes(){
   var spellTypesSet = new Set();
 
   // Add each type of spell to the set
-  for (var spell in spellData) {
+  for (var spell in spellList) {
     if (!spellTypesSet.has(spellData[spell]["type"])){
       spellTypesSet.add((spellData[spell]["type"]));
     }
@@ -1131,6 +1131,7 @@ function makeMostUsedPage(){
   }
 
   // Fill with background div
+
   var parentDiv = document.getElementById("page_MostUsed")
 
   var width = parentDiv.offsetWidth - 50;
@@ -1153,57 +1154,58 @@ function makeMostUsedPage(){
   parentDiv.appendChild(backgroundSVG);
 
 
-
+  // Set variables for treemap
   var color = d3.scaleOrdinal(d3.schemePastel1);
   var parentSVG = d3.select('#mostUsedSVG');
 
 
-  const root = d3.treemap()
-    // .tile(d3[tile])
+  // Create hierarchy
+
+  var root = d3.hierarchy(spellTypes)
+    .sum(function (d) { return d.size});
+
+  var treemap = d3.treemap()
     .size([width, height])
-    .padding(1)
-    .round(true)
-  (d3.hierarchy(spellTypes)
-    .sum(d => d.value)
-    .sort((a, b) => b.value - a.value))
+    .padding(2);
 
-  // var groups = parentSVG.selectAll('g')
-  //   .data(root.descendants())
-  //   .enter()
-  //   .append('svg:g')
+  treemap(root);
 
+  // Create g element for each box
 
-  // var cells = parentSVG.selectAll(".cell")
-  //   .data(treemap)
-  //   .enter()
-  //   .append("g")
-  //   .attr("class", "cell")
-  //
-  // cells.append("rect")
-  //   .attr("x", function(d) {return d.x0})
-  //   .attr("y", function(d) {return d.y0})
-  //   .attr("width", function(d) {return d.x1})
-  //   .attr("height", function(d) {return d.y1})
-  //   .attr("fill", function(d) {return d.children ? null : color(d.parent.name);})
-
-
-
-
-    const leaf = parentSVG.selectAll("g")
+  const leaf = parentSVG.selectAll("g")
     .data(root.leaves())
     .enter()
     .append("g")
-      .attr("transform", d => `translate(${d.x0},${d.y0})`);
+      .attr("transform", d => `translate(${d.x0},${d.y0})`)
+      .attr("class", d => {return "leaf"+d.data.name});
 
+  // Create <title> as spellname
   leaf.append("title")
-      .text(d => "this"); //d.data.name?
+      .text(d => d.data.name); //d.data.name?
 
+  //
   leaf.append("rect")
       // .attr("id", d => (d.leafUid = DOM.uid("leaf")).id)
       .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
       .attr("fill-opacity", 0.6)
       .attr("width", d => d.x1 - d.x0)
       .attr("height", d => d.y1 - d.y0);
+
+  leaf.append("clipPath")
+      // .attr("id", d => (d.clipUid = DOM.uid("clip")).id)
+    .append("use")
+      // .attr("xlink:href", d => d.leafUid.href);
+
+  leaf.append("text")
+      // .attr("clip-path", d => d.clipUid)
+    .selectAll("tspan")
+    .data(d => d.data.name)
+    .enter()
+    .append("tspan")
+      .attr("x", 3)
+      .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
+      .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
+      .text(d => d);
 
 }
 
