@@ -1074,7 +1074,7 @@ function makeClassificationPage(){
 
   // Tooltip div
 
-  var tooltipDiv = d3.select("body").append("div")
+  var classificationTooltipDiv = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
@@ -1123,16 +1123,16 @@ function makeClassificationPage(){
     .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
     .on("mouseover", function(d) {
       if (d.depth == 2){
-        tooltipDiv.transition()
+        classificationTooltipDiv.transition()
         .duration(200)
         .style("opacity", .9);
-        tooltipDiv.html(firstLetterUppercase(d.data.name) + " : " + firstLetterUppercase(spellList[d.data.name]["description"]))
+        classificationTooltipDiv.html(firstLetterUppercase(d.data.name) + " : " + firstLetterUppercase(spellList[d.data.name]["description"]))
         .style("left", (d3.event.pageX) + "px")
         .style("top", (d3.event.pageY - 28) + "px");
       }
     })
     .on("mouseout", function(d) {
-        tooltipDiv.transition()
+        classificationTooltipDiv.transition()
             .duration(500)
             .style("opacity", 0);
     });
@@ -1159,8 +1159,6 @@ function makeClassificationPage(){
 function makeMostUsedPage(){
 
   var spellTypes = getDiffTypes();
-
-  console.log(spellTypes);
 
   // Add in totals to the data structure
 
@@ -1193,6 +1191,10 @@ function makeMostUsedPage(){
 
   parentDiv.appendChild(backgroundSVG);
 
+  // Tooltip div
+  var mostUsedTooltipDiv = d3.select("body").append("div")
+  .attr("class", "tooltip")
+  .style("opacity", 0);
 
   // Set variables for treemap
   var color = d3.scaleOrdinal(d3.schemePastel1);
@@ -1226,29 +1228,35 @@ function makeMostUsedPage(){
 
   // Add in box
   leaf.append("rect")
-      // .attr("id", d => {return "rect"+d.data.name})
       .attr("id", d => (d.leafUid = "rect"+d.data.name))
       .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
       .attr("fill-opacity", 0.6)
       .attr("width", d => d.x1 - d.x0)
-      .attr("height", d => d.y1 - d.y0);
+      .attr("height", d => d.y1 - d.y0)
+      .on("mouseover", function(d) {
+          mostUsedTooltipDiv.transition()
+          .duration(200)
+          .style("opacity", .9);
+          mostUsedTooltipDiv.html(
+            firstLetterUppercase(d.data.name) + " : " +
+            firstLetterUppercase(spellList[d.data.name]["description"]) + "<br>" +
+            "Total : " + d.data.size)
+          .style("left", (d3.event.pageX) + "px")
+          .style("top", (d3.event.pageY - 28) + "px");
+      })
+      .on("mouseout", function(d) {
+          mostUsedTooltipDiv.transition()
+              .duration(500)
+              .style("opacity", 0);
+      });
 
+  // Add spellname as text and wrap in rectangle width
   leaf.append("text")
     .attr("x", 4)
     .attr("y", 10)
     .text(d => d.data.name)
     .attr("class", d => {console.log(d.x1 - d.x0); return d.x1 - d.x0}) // Awkwardly passing in boundingWidth as a class because I can't figure out how .call() works :(
     .call(wrap, 5);
-    // .call(wrap, (d => {console.log("this"); return (d.x1 - d.x0)})); // wrap the text in <= 30 pixels
-    // .selectAll("tspan")
-    // .data(d => d.data.name)
-    // .enter()
-    // .append("tspan")
-    //   .attr("x", 3)
-    //   .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
-    //   .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
-    //   .text(d => d);
-
 }
 
 function makeFullBookPage(){
