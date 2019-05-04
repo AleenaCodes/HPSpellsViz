@@ -76,10 +76,12 @@ var spellData = {
         "total": 3,
         "lines": [["3",24267],["4",16698],["7",430]]
     },
-    "conjunctivitis":
+    "conjunctivitus":
     {
         "description": "damages the eyesight of your opponent, making them seem to have pink eye",
-        "type": "curse"
+        "type": "curse",
+        "total": 1,
+        "lines": [["4",24280]]
     },
     "crucio":
     {
@@ -651,7 +653,7 @@ var spellList = {
     "description" : "confounds your target, or makes them temporarily confused",
     "type" : "charm"
   },
-  "conjunctivitis" : {
+  "conjunctivitus" : {
     "description" : "damages the eyesight of your opponent, making them seem to have pink eye",
     "type" : "curse"
   },

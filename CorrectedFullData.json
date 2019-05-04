@@ -79,7 +79,9 @@
     "conjunctivitis":
     {
         "description": "damages the eyesight of your opponent, making them seem to have pink eye",
-        "type": "curse"
+        "type": "curse",
+        "total": 1,
+        "lines": [["4",24280]]
     },
     "crucio":
     {
