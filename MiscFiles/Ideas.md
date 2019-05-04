@@ -13,18 +13,11 @@ Occurrences  : []  : Line number of each occurrence
 Type         : Str : Category of spell
 
 
-## Layout 2
-
-Maybe have different structures for each page? Or one with all info, and another without list of occurrence locations
-
 ## Parsing
 
-Could splice together all txt files and then run
+Could splice together all txt files and then run (might be a bit big though)
 If statement to just get each spell out? Import as set and check if in
-Find a list of all spells!
-
-- Keep a note which lines each book start and end on
-- Visualisation is just a matter of making dot on percentage of total number of lines
+Find/make a list of all spells!
 
 # Pages to Have
 
@@ -33,8 +26,11 @@ Find a list of all spells!
   - Maybe have grouped and coloured?
 - Most used
   - Bubbles - size depending on largest
+  - Other tree-like structure may be better
 - Full book
   - All 7 books with coloured dots showing where spells used
+  - Keep a note which lines each book start and end on
+  - Visualisation is just a matter of making dot on percentage of total number of lines
 
 # Tasks
 
