@@ -961,6 +961,22 @@ var spellList = {
   },
 };
 
+var numOfSpell = 1;
+var numOfDots = 0;
+
+var spellTotals = {};
+
+spellIter = 1;
+for (var spell in spellData){ //Loop to fill up spellTotals
+  newSpell = {};
+  newSpell["name"] = spell;
+  newSpell["total"] = spellData[spell]["total"];
+
+  spellTotals[spellIter] = newSpell;
+  spellIter++;
+}
+console.log(spellTotals);
+
 function getDiffTypes(){
   var spellTypesSet = new Set();
 
@@ -1067,12 +1083,15 @@ function formatSpellData(data){
   return newData;
 }
 
-function testerFunc(data){
-  console.log(data);
-  console.log(data["lines"]);
-  console.log(data["lines"][0]);
-  return data.lines[0];
-  // return [1,2,3];
+function incrementNumofSpell(){ // a weird workaround
+  console.log("numOfDots = " + numOfDots + " numOfSpell = " + numOfSpell);
+
+  if (numOfDots > spellTotals[numOfSpell]["total"]){
+    console.log("incremented numOfSpell");
+    numOfSpell++;
+    numOfDots = 1;
+  }
+  return numOfSpell;
 }
 
 function makeClassificationPage(){
@@ -1317,7 +1336,7 @@ function makeFullBookPage(){
   var parentDiv = document.getElementById("page_FullBook")
 
   var width = parentDiv.offsetWidth - 50;
-  var height = parentDiv.offsetHeight;
+  var height = 87*20; //87 spells * 20 px for each one
 
   var backgroundSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     backgroundSVG.setAttributeNS(null, 'width', (width));
@@ -1426,10 +1445,14 @@ function makeFullBookPage(){
         var percentage = lineNo / bookLengths[bookNo];
         return (((bookNo)*cellWidth)+(percentage*cellWidth))
       }) //Get
-      .attr("cy", (d,i) => {return ((i+1)*cellHeight)+(cellHeight/2)}) //how do I get the y value when I'm now too deep inside the nest? :(
+      .attr("cy", d => {
+        numOfDots++;
+        spellHeight = incrementNumofSpell();
+        return ((spellHeight*cellHeight)+(cellHeight/2))
+      })
       .attr("r", (cellHeight-5)/2)
       .attr("fill", d => {return color(Number(d[0]))})
-      .attr("fill-opacity", 0.6);
+      .attr("fill-opacity", d => {return 0.6});
 }
 
 function makeTitlePage(){
