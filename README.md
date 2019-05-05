@@ -4,4 +4,6 @@ Sunburst adapted from examples at http://bl.ocks.org/mbostock/910126 and https:/
 
 Treemap adapted from https://observablehq.com/@d3/treemap and https://bl.ocks.org/mbostock/7555321
 
+Table adapted from http://jsfiddle.net/christopheviau/v6VMf/
+
 Tooltip adapted from examples at from http://bl.ocks.org/d3noob/a22c42db65eb00d4e369

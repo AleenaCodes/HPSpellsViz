@@ -1012,11 +1012,6 @@ function firstLetterUppercase(str){
 }
 
 function wrap(text, width) {
-  console.log("calling wrap with width"+width);
-  console.log(text.attr("previousSibling"));
-  console.log(text.previousSibling);
-  console.log(text);
-
     text.each(function () {
         var text = d3.select(this),
             letters = text.text().split('').reverse(),
@@ -1033,7 +1028,6 @@ function wrap(text, width) {
                         .attr("x", x)
                         .attr("y", y)
                         .attr("dy", dy + "em");
-        console.log(boundingWidth);
         while (letter = letters.pop()) {
             line.push(letter);
             tspan.text(line.join(""));
@@ -1214,8 +1208,6 @@ function makeMostUsedPage(){
 
   treemap(root);
 
-  console.log(root);
-
   // Create g element for each box
   const leaf = parentSVG.selectAll("g")
     .data(root.leaves())
@@ -1257,11 +1249,21 @@ function makeMostUsedPage(){
     .attr("x", 4)
     .attr("y", 10)
     .text(d => d.data.name)
-    .attr("class", d => {console.log(d.x1 - d.x0); return d.x1 - d.x0}) // Awkwardly passing in boundingWidth as a class because I can't figure out how .call() works :(
+    .attr("class", d => {return d.x1 - d.x0}) // Awkwardly passing in boundingWidth as a class because I can't figure out how .call() works :(
     .call(wrap, 5);
 }
 
 function makeFullBookPage(){
+
+  // Form data
+  var columnLabels = ["Book 1", "Book 2", "Book 3", "Book 4", "Book 5", "Book 6", "Book 7"];
+  var rowLabels = [" "];
+
+  for (spell in spellData){
+    rowLabels.push(spell);
+  }
+
+  // Fill with background div
   var parentDiv = document.getElementById("page_FullBook")
 
   var width = parentDiv.offsetWidth - 50;
@@ -1270,6 +1272,7 @@ function makeFullBookPage(){
   var backgroundSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     backgroundSVG.setAttributeNS(null, 'width', (width));
     backgroundSVG.setAttributeNS(null, 'height', (height));
+    backgroundSVG.setAttribute('id', 'fullBookSVG');
 
   var newSquare = document.createElementNS("http://www.w3.org/2000/svg","rect");
     newSquare.setAttributeNS(null, 'width', (width));
@@ -1281,9 +1284,85 @@ function makeFullBookPage(){
   backgroundSVG.appendChild(newSquare);
 
   parentDiv.appendChild(backgroundSVG);
+
+  // Tooltip div
+  var fullBookTooltipDiv = d3.select("body").append("div")
+  .attr("class", "tooltip")
+  .style("opacity", 0);
+
+  // Set variables for treemap
+  var color = d3.scaleOrdinal(d3.schemePastel1);
+  var parentSVG = d3.select('#fullBookSVG');
+
+  // Groups for table headers and body
+  var tableBodyGroup = parentSVG.append('g').attr('class', 'tableHeader');
+  var tableHeaderGroup = parentSVG.append('g').attr('class', 'tableHeader');
+
+  // Groups for header row and column
+  var rowHeaderGroup = tableHeaderGroup.append('g').attr('class', 'rowHeader');
+  var colHeaderGroup = tableHeaderGroup.append('g').attr('class', 'colHeader');
+
+  // Cell heights and widths
+  var cellWidth = width / 8;
+  var cellHeight = 20;
+
+  // Make row header
+  var rowHeaderCells = rowHeaderGroup.selectAll('rect.row-header-cell')
+    .data(rowLabels);
+
+  rowHeaderCells.enter()
+    .append('rect')
+    .attr("class", "row-header-cell")
+    .attr("width", cellWidth)
+    .attr("height", cellHeight)
+    .attr("x", 0)
+    .attr("y", (d,i) => {return i * cellHeight})
+    .attr("fill", "white");
+
+  rowHeaderCells.enter()
+    .append('text')
+    .attr("class", "row-header-content")
+    .attr("x", 0)
+    .attr("y", (d,i) => {return i * cellHeight})
+    .attr("dx", cellWidth/2)
+    .attr("dy", cellHeight/2)
+    .text(function(d, i){return d;})
+    .attr("fill", "black")
+    .attr("text-anchor", "middle");
+
+  // Make column header
+  var colHeaderCells = colHeaderGroup.selectAll('rect.col-header-cell')
+    .data(columnLabels);
+
+  colHeaderCells.enter()
+    .append('rect')
+    .attr("class", "col-header-cell")
+    .attr("width", cellWidth)
+    .attr("height", cellHeight)
+    .attr("x", (d,i) => {return (i+1) * cellWidth})
+    .attr("y", 0)
+    .attr("fill", "white");
+
+  colHeaderCells.enter()
+    .append('text')
+    .attr("class", "col-header-content")
+    .attr("x", (d,i) => {return (i+1) * cellWidth})
+    .attr("y", 0)
+    .attr("dx", cellWidth/2)
+    .attr("dy", cellHeight/2)
+    .text(function(d, i){return d;})
+    .attr("fill", "black")
+    .attr("text-anchor", "middle");
+
+    // Plan
+
+    // Append group inside tableBodyGroup - 1 <g> for each spell
+      // Inside these draw circles depending on how far along each ["line"] entry is
 }
 
 function makeTitlePage(){
+  // Not currently used
+  // Add in background div
   var parentDiv = document.getElementById("page_Title")
 
   var width = parentDiv.offsetWidth - 50;

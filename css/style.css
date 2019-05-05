@@ -64,6 +64,27 @@ body {
   font-family: "Arial", serif;
 }
 
+/* Title Page */
+
+.section1 h1{
+	font-size: 30pt;
+	padding: 20px;
+}
+.section1 h3 {
+	font-size: 20pt;
+	padding: 20px;
+}
+.section1 p{
+	padding: 20px;
+}
+.section1 ul{
+	padding: 20px;
+}
+.section1 li{
+	padding: 10px;
+}
+
+/* Tooltip */
 
 div.tooltip {
   position: absolute;
