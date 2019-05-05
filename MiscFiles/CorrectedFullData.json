@@ -380,7 +380,9 @@
     "obscuro":
     {
         "description": "blindfolds target",
-        "type": "conjuration"
+        "type": "conjuration",
+        "total": 1,
+        "lines": [["7", 14493]]
     },
     "oppugno":
     {

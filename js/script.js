@@ -380,7 +380,9 @@ var spellData = {
     "obscuro":
     {
         "description": "blindfolds target",
-        "type": "conjuration"
+        "type": "conjuration",
+        "total": 1,
+        "lines": [["7", 14493]]
     },
     "oppugno":
     {
@@ -1011,7 +1013,7 @@ function firstLetterUppercase(str){
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function wrap(text, width) {
+function wrap(text, width) { //don't even use width!
     text.each(function () {
         var text = d3.select(this),
             letters = text.text().split('').reverse(),
@@ -1063,6 +1065,14 @@ function formatSpellData(data){
 
   console.log(newData);
   return newData;
+}
+
+function testerFunc(data){
+  console.log(data);
+  console.log(data["lines"]);
+  console.log(data["lines"][0]);
+  return data.lines[0];
+  // return [1,2,3];
 }
 
 function makeClassificationPage(){
@@ -1279,13 +1289,13 @@ function makeFullBookPage(){
   var columnLabels = ["Book 1", "Book 2", "Book 3", "Book 4", "Book 5", "Book 6", "Book 7"];
   var rowLabels = [];
   var bookLengths = {
-    "Book 1": 19522,
-    "Book 2": 21240,
-    "Book 3": 27395,
-    "Book 4": 44116,
-    "Book 5": 61549,
-    "Book 6": 40241,
-    "Book 7": 37337
+    "1": 19522,
+    "2": 21240,
+    "3": 27395,
+    "4": 44116,
+    "5": 61549,
+    "6": 40241,
+    "7": 37337
   }
   var shortNames = {
     "Book 1": "1",
@@ -1394,11 +1404,7 @@ function makeFullBookPage(){
     .attr("fill", "black")
     .attr("text-anchor", "middle");
 
-    // Plan
-
     // Append group inside tableBodyGroup - 1 <g> for each spell
-    // Inside each group draw circles depending on how far along each ["line"] entry is
-
     var bodyGroups = tableBodyGroup.selectAll("g.dotsGroup")
       .data(allSpells["data"]);
 
@@ -1406,14 +1412,24 @@ function makeFullBookPage(){
       .append("g")
         .attr("class", "dotsGroup")
         .attr("id", d => {return "dotsGroup"+firstLetterUppercase(d.name)})
-        // .attr("transform", (d,i) => 'translate((i+1))') // Transform it?
-        .append("circle")
-          .attr("cx", (d,i) => {console.log(i); return cellWidth+(cellWidth/2)})
-          .attr("cy", (d,i) => {return ((i+1)*cellHeight)+(cellHeight/2)})
-          .attr("r", (cellHeight-5)/2)
-          .attr("fill", "red");
 
-  console.log(color(1));
+    // Inside each group draw circles depending on how far along each ["line"] entry is
+
+    bodyGroup.selectAll("circle")
+      .data(function(d,i) { return d["lines"] })
+      .enter()
+      .append("circle")
+      .attr("class", d => d)
+      .attr("cx", (d,i) => {
+        var bookNo = Number(d[0]);
+        var lineNo = d[1];
+        var percentage = lineNo / bookLengths[bookNo];
+        return (((bookNo)*cellWidth)+(percentage*cellWidth))
+      }) //Get
+      .attr("cy", (d,i) => {return ((i+1)*cellHeight)+(cellHeight/2)}) //how do I get the y value when I'm now too deep inside the nest? :(
+      .attr("r", (cellHeight-5)/2)
+      .attr("fill", d => {return color(Number(d[0]))})
+      .attr("fill-opacity", 0.6);
 }
 
 function makeTitlePage(){
