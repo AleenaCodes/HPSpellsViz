@@ -1045,6 +1045,26 @@ function wrap(text, width) {
     });
 }
 
+function formatSpellData(data){
+  console.log(data);
+  var newData = {};
+  newData["data"] = [];
+
+  for (var spell in data){
+    var newSpell = {};
+    newSpell["name"] = spell;
+    newSpell["description"] = data[spell]["description"];
+    newSpell["lines"] = data[spell]["lines"];
+    newSpell["total"] = data[spell]["total"];
+    newSpell["type"] = data[spell]["type"];
+
+    newData["data"].push(newSpell);
+  }
+
+  console.log(newData);
+  return newData;
+}
+
 function makeClassificationPage(){
 
   var spellTypes = getDiffTypes();
@@ -1257,11 +1277,31 @@ function makeFullBookPage(){
 
   // Form data
   var columnLabels = ["Book 1", "Book 2", "Book 3", "Book 4", "Book 5", "Book 6", "Book 7"];
-  var rowLabels = [" "];
+  var rowLabels = [];
+  var bookLengths = {
+    "Book 1": 19522,
+    "Book 2": 21240,
+    "Book 3": 27395,
+    "Book 4": 44116,
+    "Book 5": 61549,
+    "Book 6": 40241,
+    "Book 7": 37337
+  }
+  var shortNames = {
+    "Book 1": "1",
+    "Book 2": "2",
+    "Book 3": "3",
+    "Book 4": "4",
+    "Book 5": "5",
+    "Book 6": "6",
+    "Book 7": "7"
+  }
 
   for (spell in spellData){
     rowLabels.push(spell);
   }
+
+  var allSpells = formatSpellData(spellData);
 
   // Fill with background div
   var parentDiv = document.getElementById("page_FullBook")
@@ -1277,8 +1317,8 @@ function makeFullBookPage(){
   var newSquare = document.createElementNS("http://www.w3.org/2000/svg","rect");
     newSquare.setAttributeNS(null, 'width', (width));
     newSquare.setAttributeNS(null, 'height', (height));
-    newSquare.setAttributeNS(null, 'fill', 'cornflowerblue');
-    newSquare.setAttributeNS(null, 'stroke', 'cornflowerblue');
+    newSquare.setAttributeNS(null, 'fill', 'white');
+    newSquare.setAttributeNS(null, 'stroke', 'white');
     newSquare.setAttributeNS(null, 'stroke-width', 3);
 
   backgroundSVG.appendChild(newSquare);
@@ -1295,7 +1335,7 @@ function makeFullBookPage(){
   var parentSVG = d3.select('#fullBookSVG');
 
   // Groups for table headers and body
-  var tableBodyGroup = parentSVG.append('g').attr('class', 'tableHeader');
+  var tableBodyGroup = parentSVG.append('g').attr('class', 'tableBody');
   var tableHeaderGroup = parentSVG.append('g').attr('class', 'tableHeader');
 
   // Groups for header row and column
@@ -1316,14 +1356,14 @@ function makeFullBookPage(){
     .attr("width", cellWidth)
     .attr("height", cellHeight)
     .attr("x", 0)
-    .attr("y", (d,i) => {return i * cellHeight})
+    .attr("y", (d,i) => {return (i+1) * cellHeight})
     .attr("fill", "white");
 
   rowHeaderCells.enter()
     .append('text')
     .attr("class", "row-header-content")
     .attr("x", 0)
-    .attr("y", (d,i) => {return i * cellHeight})
+    .attr("y", (d,i) => {return (i+1) * cellHeight})
     .attr("dx", cellWidth/2)
     .attr("dy", cellHeight/2)
     .text(function(d, i){return d;})
@@ -1357,7 +1397,23 @@ function makeFullBookPage(){
     // Plan
 
     // Append group inside tableBodyGroup - 1 <g> for each spell
-      // Inside these draw circles depending on how far along each ["line"] entry is
+    // Inside each group draw circles depending on how far along each ["line"] entry is
+
+    var bodyGroups = tableBodyGroup.selectAll("g.dotsGroup")
+      .data(allSpells["data"]);
+
+    var bodyGroup = bodyGroups.enter()
+      .append("g")
+        .attr("class", "dotsGroup")
+        .attr("id", d => {return "dotsGroup"+firstLetterUppercase(d.name)})
+        // .attr("transform", (d,i) => 'translate((i+1))') // Transform it?
+        .append("circle")
+          .attr("cx", (d,i) => {console.log(i); return cellWidth+(cellWidth/2)})
+          .attr("cy", (d,i) => {return ((i+1)*cellHeight)+(cellHeight/2)})
+          .attr("r", (cellHeight-5)/2)
+          .attr("fill", "red");
+
+  console.log(color(1));
 }
 
 function makeTitlePage(){
