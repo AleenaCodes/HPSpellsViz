@@ -38,7 +38,7 @@ Find/make a list of all spells!
 - Classify them
 - Combine all books
 - Parse through to get numbers
-  - Script will make dict of spell name, number of occurences, and list of lines of occurences
+  - Script will make dict of spell name, number of occurrences, and list of lines of occurrences
 - Combine spell categories with dictionary
   - Will need script to go through each spell name, assign category and pull in data from dictionary
 - Result: full data!
