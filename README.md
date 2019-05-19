@@ -1,5 +1,7 @@
 Some visualisations to experiment with [D3.js](https://d3js.org/)
 
+Shows all the spells said aloud in the Harry Potter books, what they do, when they were said, and how often they were used
+
 Hosted at [https://aleenacodes.github.io/HPSpellsViz](https://aleenacodes.github.io/HPSpellsViz)
 
 =============================
