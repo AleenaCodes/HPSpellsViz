@@ -1452,7 +1452,20 @@ function makeFullBookPage(){
       })
       .attr("r", (cellHeight-5)/2)
       .attr("fill", d => {return color(Number(d[0]))})
-      .attr("fill-opacity", d => {return 0.6});
+      .attr("fill-opacity", d => {return 0.6})
+      .on("mouseover", function(d) {
+          fullBookTooltipDiv.transition()
+          .duration(200)
+          .style("opacity", .9);
+          fullBookTooltipDiv.html("tester tooltip text")
+          .style("left", (d3.event.pageX) + "px")
+          .style("top", (d3.event.pageY - 28) + "px");
+      })
+      .on("mouseout", function(d) {
+          fullBookTooltipDiv.transition()
+              .duration(500)
+              .style("opacity", 0);
+      });
 }
 
 function makeTitlePage(){
